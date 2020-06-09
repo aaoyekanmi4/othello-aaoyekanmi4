@@ -12,18 +12,18 @@ const initialBoardData = Array.from(Array(BOARD_SIZE), () =>
 
 let id = 0;
 
-for (let x = 0; x < BOARD_SIZE; x++) {
-  for (let y = 0; y < BOARD_SIZE; y++) {
+for (let y = 0; y < BOARD_SIZE; y++) {
+  for (let x = 0; x < BOARD_SIZE; x++) {
     //for central squares, place inital white and black pieces
     if ((x === 3 && y === 3) || (x === 4 && y === 4)) {
-      initialBoardData[x][y] = { id, x, y, color: "b" };
+      initialBoardData[y][x] = { id, x, y, color: "b" };
     }
     else if ((x === 4 && y === 3) || (x === 3 && y === 4)) {
-      initialBoardData[x][y] = { id, x, y, color: "w" };
+      initialBoardData[y][x] = { id, x, y, color: "w" };
     }
     //make all other squares empty
     else {
-        initialBoardData[x][y] = {id, x, y, color:null}
+        initialBoardData[y][x] = {id, x, y, color:null}
     }
     id++;
   }
