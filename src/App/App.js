@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { showPlayableSquares, flipPieces } from '../GameLogic';
+import { showPlayableSquares, flipPieces, placePiece } from '../GameLogic';
 import Board from '../Board/Board';
 
 import initialBoardData from "../InitialBoardData";
@@ -27,18 +27,17 @@ function App() {
   }, [])
 
   const handlePlacingPiece = (id) => { 
-    for (let row of board) { 
-      for (let col of row) { 
-        if (col.id === id) {
-          col.color ="b"
-         } 
-      }
-    }
-    console.log(id);
-    const changedBoard = flipPieces(id, [...board], connections);
+    const newPiece = placePiece(id, board, setPlayer1);
+    console.log(newPiece)
+    setPlayer1(prevPlayer => ({ ...prevPlayer, pieces:[...prevPlayer.pieces, newPiece]}))
+   
+    const changedBoard = flipPieces(id, [...board], connections, setPlayer1);
+
     setBoard(changedBoard);
+   
 
   }
+  console.log(player1);
   
   return (
     <div className="App">

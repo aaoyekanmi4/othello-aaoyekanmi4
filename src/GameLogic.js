@@ -64,18 +64,34 @@ const traverseUntilEmptySquare = (x, y, offsetX, offsetY, opposingColor, connect
   }
 };
 
+const placePiece = (id, board, setPlayer1) => { 
+    
+ for (let row of board) { 
+      for (let col of row) { 
+          if (col.id === id) {
+            col.color = col.color === "pb" ? "b" : "w";
+              return col;
+         } 
+      }
+    }
+}
 
 
-
-const flipPieces = (id, board, connections) => {
-  //add piece of players color to the board at id space
+const flipPieces = (id, board, connections, setPlayer1) => {
+  
 
     let piecesArr = connections[id];
   for (let piece of piecesArr) {
     board[piece.y][piece.x].color =
       board[piece.y][piece.x].color === "w" ? "b" : "w";
     }
+ 
+       
+ setPlayer1((prevPlayer) => ({
+   ...prevPlayer,
+   pieces: [...prevPlayer.pieces, ...piecesArr],
+ }));
     return board;
 };
 
-export { showPlayableSquares, flipPieces };
+export { showPlayableSquares, flipPieces, placePiece };
