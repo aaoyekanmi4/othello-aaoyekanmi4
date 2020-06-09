@@ -2,6 +2,7 @@ import React from 'react';
 import './Cell.css';
 import PlayableSpace from '../PlayableSpace/PlayableSpace';
 import Piece from '../Piece/Piece';
+
 const Cell = ({ color }) => {
     
     const displayCellStatus = (color) => { 
@@ -11,9 +12,9 @@ const Cell = ({ color }) => {
             case "w":
                 return <Piece color="white"/>
             case "pw":
-                return "pw"
+                return <PlayableSpace color ="white"/>
             case "pb":
-                return "pb"
+                return <PlayableSpace color="black" />;
             default:
                 return null;
         }    

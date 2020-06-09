@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Row from '../Row/Row';
 import './Board.css';
-import initialBoardData from '../InitialBoardData';
 
 
-const Board = () => {
-    
-const [board, setBoard] = useState(initialBoardData);
-
+const Board = ({ board }) => {
     
     
 const generateBoard = () => {

@@ -1,4 +1,6 @@
 .playable-space {
+    border-width:2px;
+    border-style:solid;
     border-radius: 50px;
     position: absolute; 
     width: 50px; 
