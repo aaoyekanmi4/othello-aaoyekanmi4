@@ -18,7 +18,7 @@ for (let y = 0; y < BOARD_SIZE; y++) {
     if ((x === 3 && y === 3) || (x === 4 && y === 4)) {
       initialBoardData[y][x] = { id, x, y, color: "b" };
     }
-    else if ((x === 4 && y === 3) || (x === 3 && y === 4)) {
+    else if ((x === 3 && y === 4) || (x === 4 && y === 3)) {
       initialBoardData[y][x] = { id, x, y, color: "w" };
     }
     //make all other squares empty

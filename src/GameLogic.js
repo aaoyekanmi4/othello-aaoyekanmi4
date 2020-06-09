@@ -1,6 +1,6 @@
-const connections = {};
 
-const showPlayableSquares = (board, piece) => {
+
+const showPlayableSquares = (board, piece, connections) => {
   const opposingColor = piece.color === "b" ? "w" : "b";
 
   //check all squares around for an adjacent opposingColor;
@@ -66,15 +66,16 @@ const traverseUntilEmptySquare = (x, y, offsetX, offsetY, opposingColor, connect
 
 
 
-console.log(connections);
-const flipPieces = (id, board) => {
+
+const flipPieces = (id, board, connections) => {
   //add piece of players color to the board at id space
 
-  let piecesArr = connections[id];
+    let piecesArr = connections[id];
   for (let piece of piecesArr) {
-    board[piece.x][piece.y].color =
-      board[piece.x][piece.y].color === "w" ? "b" : "w";
-  }
+    board[piece.y][piece.x].color =
+      board[piece.y][piece.x].color === "w" ? "b" : "w";
+    }
+    return board;
 };
 
 export { showPlayableSquares, flipPieces };

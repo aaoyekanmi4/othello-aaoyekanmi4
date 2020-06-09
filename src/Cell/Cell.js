@@ -3,7 +3,7 @@ import './Cell.css';
 import PlayableSpace from '../PlayableSpace/PlayableSpace';
 import Piece from '../Piece/Piece';
 
-const Cell = ({ color }) => {
+const Cell = ({ id, color, handlePlacingPiece }) => {
     
     const displayCellStatus = (color) => { 
         switch (color) { 
@@ -12,9 +12,15 @@ const Cell = ({ color }) => {
             case "w":
                 return <Piece color="white"/>
             case "pw":
-                return <PlayableSpace color ="white"/>
+                return <PlayableSpace handlePlacingPiece={handlePlacingPiece} id={id} color ="white"/>
             case "pb":
-                return <PlayableSpace color="black" />;
+                return (
+                  <PlayableSpace
+                    handlePlacingPiece={handlePlacingPiece}
+                    id={id}
+                    color="black"
+                  />
+                );
             default:
                 return null;
         }    

@@ -3,13 +3,14 @@ import Row from '../Row/Row';
 import './Board.css';
 
 
-const Board = ({ board }) => {
+const Board = ({ board, handlePlacingPiece }) => {
     
     
 const generateBoard = () => {
   return board.map((row, index) => {
       return <Row key={index}
-                  cellData={board[index]}
+          cellData={board[index]}
+          handlePlacingPiece={handlePlacingPiece}
           />;
   });
 };
