@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import './PlayableSpace.css';
 
-const PlayableSpace = () => {
+const PlayableSpace = (props) => {
     return (
-        <div>
-            PlayableSpace
+        <div class="playable-space" style={{ borderColor: props.color}}>
+            
         </div>
     )
 }

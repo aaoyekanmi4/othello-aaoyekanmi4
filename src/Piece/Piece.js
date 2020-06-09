@@ -1,9 +1,8 @@
 import React from 'react'
-
-const Piece = () => {
+import './Piece.css';
+const Piece = (props) => {
     return (
-        <div>
-            Piece
+        <div class="piece" style={{ backgroundColor: props.color }}>
         </div>
     )
 }

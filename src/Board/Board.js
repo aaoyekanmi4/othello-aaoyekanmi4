@@ -6,7 +6,8 @@ import initialBoardData from '../InitialBoardData';
 
 const Board = () => {
     
-    const [board, setBoard] = useState(initialBoardData);
+const [board, setBoard] = useState(initialBoardData);
+
     
     
 const generateBoard = () => {
