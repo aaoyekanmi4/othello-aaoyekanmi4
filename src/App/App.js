@@ -11,13 +11,13 @@ import {
 /* Components */
 import Board from "../Board/Board";
 import SideBar from "../Sidebar/SideBar";
-import initialBoardData from "../InitialBoardData";
+import makeInitialBoard from "../InitialBoardData";
 import "./App.css";
 
 function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
-  const [board, setBoard] = useState(initialBoardData);
+  const [board, setBoard] = useState(makeInitialBoard());
   const [isGameOver, setIsGameOver] = useState(false);
   const [connections, setConnections] = useState({});
   const [playersWhoCantMove, setPlayersWhoCantMove] = useState(0);
@@ -40,6 +40,32 @@ function App() {
 
     setIsGameStarted(true);
   };
+  
+  const resetGame = () => {
+    setConnections({});
+    setAlertMsg({});
+    setPlayersWhoCantMove(0);
+  
+    setBoard(makeInitialBoard());
+     setPlayer1((prevPlayer) => ({
+      
+       pieces: [
+      { id: 36, x: 4, y: 4, color: "b" },
+      { id: 27, x: 3, y: 3, color: "b" },
+    ],
+     })
+     );
+       setPlayer2((prevPlayer) => ({
+         pieces: [
+           { id: 35, x: 3, y: 4, color: "w" },
+           { id: 28, x: 4, y: 3, color: "w" },
+         ],
+       }));
+    setIsGameOver(false);
+    setIsGameStarted(false);
+      
+  }
+
 
   useEffect(() => {
     if (isGameStarted) {
@@ -49,6 +75,7 @@ function App() {
   }, [blacksTurn, isGameStarted]);
 
   const showPlayersTurn = () => {
+  
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
 
@@ -135,7 +162,8 @@ function App() {
         isGameStarted={isGameStarted}
         startGame={startGame}
         isGameOver={isGameOver}
-        alertMsg = {alertMsg}
+        alertMsg={alertMsg}
+        resetGame={resetGame}
       />
     </div>
   );
