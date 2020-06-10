@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
+
+/* Game logic functions*/
 import {
   showPlayableSquares,
   flipPieces,
   placePiece,
   clearPlayableMarkers,
 } from "../GameLogic";
+
+/* Components */
 import Board from "../Board/Board";
+import StartScreen from '../StartScreen/StartScreen';
 import SideBar from "../Sidebar/SideBar";
 import initialBoardData from "../InitialBoardData";
 import "./App.css";
 
 function App() {
+
   const [board, setBoard] = useState(initialBoardData);
   const [showGameOver, setShowGameOver] = useState(false);
   const [connections, setConnections] = useState({});
@@ -108,6 +114,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <Board board={board} handlePlacingPiece={handlePlacingPiece} />
       <SideBar blacksTurn={blacksTurn} player1={player1} player2={player2}/>
     </div>
