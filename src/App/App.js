@@ -12,12 +12,7 @@ function App() {
   const [player1, setPlayer1] = useState({
     pieces: [
       { id: 36, x: 4, y: 4, color: "b" },
-      {
-        id: 27,
-        x: 3,
-        y: 3,
-        color: "b",
-      },
+      { id: 27, x: 3, y: 3, color: "b" },
     ],
   });
   const [player2, setPlayer2] = useState({
@@ -26,8 +21,13 @@ function App() {
       { id: 28, x: 4, y: 3, color: "w" },
     ],
   });
+
+  useEffect(() => {
+    showPlayersTurn();
+  }, [blacksTurn]);
+
   const showPlayersTurn = () => { 
-    
+
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
     if (blacksTurn) {
@@ -39,17 +39,12 @@ function App() {
         showPlayableSquares(boardCopy, piece, connectionsCopy)
       );
     }
-      setBoard(boardCopy);
+    setBoard(boardCopy);
     setConnections(connectionsCopy);
   
   }
 
-  useEffect(() => { 
-    showPlayersTurn()
-
-    console.log('Player1:', player1.pieces)
-     console.log("Player2:", player2.pieces);
-  }, [blacksTurn])
+  
  
   const handlePlacingPiece = (id, active) => { 
     let activePlayerSetter;
@@ -64,18 +59,15 @@ function App() {
         passivePlayerSetter = setPlayer1;
       }
         
-    const newPiece = placePiece(id, board, activePlayerSetter);
+    placePiece(id, board, activePlayerSetter);
   
-    activePlayerSetter(prevPlayer => ({ ...prevPlayer, pieces:[...prevPlayer.pieces, newPiece]}))
-   
     const flippedBoard = flipPieces(id, [...board], connections, activePlayerSetter, passivePlayerSetter);
-
-
-  const clearedBoard = clearPlayableMarkers(flippedBoard);
+    
+    const clearedBoard = clearPlayableMarkers(flippedBoard);
    
     setConnections({});
     setBlacksTurn(!blacksTurn);
-     setBoard(clearedBoard);
+    setBoard(clearedBoard);
   }
 
  

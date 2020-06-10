@@ -12,6 +12,8 @@ const showPlayableSquares = (board, piece, connections) => {
       let currentX = piece.x + offsetX;
       let currentY = piece.y + offsetY;
 
+
+      //if within board dimensions and next square contains opponent piece
       if (
         currentX < board.length &&
         currentX >= 0 &&
@@ -19,7 +21,9 @@ const showPlayableSquares = (board, piece, connections) => {
         currentY >= 0 &&
         board[currentY][currentX].color === opposingColor
       ) {
-        gatherConnections(
+        /*Add arrays connected opponent pieces to an object with id of null square at end. Helps with ease of changing all connected pieces on click. 
+        */
+        gatherConnectionsOfOpponentPieces(
           currentX,
           currentY,
           offsetX,
@@ -35,7 +39,8 @@ const showPlayableSquares = (board, piece, connections) => {
   return board;
 };
 
-const gatherConnections = (
+
+const gatherConnectionsOfOpponentPieces = (
   x,
   y,
   offsetX,
@@ -48,35 +53,48 @@ const gatherConnections = (
   
   //while within boundaries of the board
   while (x < board.length && x >= 0 && y < board.length && y >= 0) {
-    if (board[y][x].color === opposingColor) {
-      chain.push(board[y][x]);
-      console.log(board[y][x]);
+    const adjacentSquare = board[y][x];
+
+    if (adjacentSquare.color === opposingColor) {
+      chain.push(adjacentSquare);
+      //traverse in same direction if opponent square found
       x += offsetX;
       y += offsetY;
-    } else if (board[y][x].color === null) {
-      board[y][x].color = opposingColor === "b" ? "pw" : "pb";
-      connections[board[y][x].id] = chain;
+    } else if (adjacentSquare.color === null) {
+
+      //put place marker on empty square by color
+      adjacentSquare.color = opposingColor === "b" ? "pw" : "pb";
+      
+      connections[adjacentSquare.id] = chain;
       return;
-    } else if (board[y][x].color === "pw" || board[y][x].color === "pb") {
-      connections[board[y][x].id] = [...connections[board[y][x].id], ...chain];
+    } else if (adjacentSquare.color === "pw" || adjacentSquare.color === "pb") {
+      
+      //case where two chains lead to same empty square, add all pieces to the array at that key
+      connections[adjacentSquare.id] = [...connections[adjacentSquare.id], ...chain];
       return;
-    } else {
+    }
+      //piece is same color as player piece
+    else {
       return;
     }
   }
 };
-
-const placePiece = (id, board) => {
+//replace marker(pw or pb) with right color of piece on click
+const placePiece = (id, board, activePlayerSetter) => {
   for (let row of board) {
     for (let square of row) {
       if (square.id === id) {
         square.color = square.color === "pb" ? "b" : "w";
-        return square;
+            activePlayerSetter((prevPlayer) => ({
+              ...prevPlayer,
+              pieces: [...prevPlayer.pieces, square],
+            }));
       }
     }
   }
 };
 
+//helper function to remove an array of values from another array
 const multiFilter = (remaining, valuesToRemove) => {
   if (!valuesToRemove.length) {
     return remaining;
@@ -107,26 +125,40 @@ const flipPieces = (
   activePlayerSetter,
   passivePlayerSetter
 ) => {
+
+  //flip the color of the pieces where the id matches the key of the connections object
   let piecesToFlip = connections[id];
+
   for (let piece of piecesToFlip) {
-    board[piece.y][piece.x].color =
-      board[piece.y][piece.x].color === "w" ? "b" : "w";
+    changePieceColor(board, piece);
   }
 
+changePieceOwnership(piecesToFlip, activePlayerSetter,passivePlayerSetter)
+  return board;
+};
+
+const changePieceColor = (board, piece) => { 
+ board[piece.y][piece.x].color =
+    board[piece.y][piece.x].color === "w" ? "b" : "w";
+  
+}
+
+const changePieceOwnership = (flippedPieces, activePlayerSetter, passivePlayerSetter) => { 
+   //add pieces to the state of the player who clicked
   activePlayerSetter((prevPlayer) => ({
     ...prevPlayer,
-    pieces: [...prevPlayer.pieces, ...piecesToFlip],
+    pieces: [...prevPlayer.pieces, ...flippedPieces],
   }));
-
+  
+  //take the same pieces away from the other player
   passivePlayerSetter((prevPlayer) => {
-    const remainingPieces = multiFilter(prevPlayer.pieces, piecesToFlip);
+    const remainingPieces = multiFilter(prevPlayer.pieces, flippedPieces);
 
     return {
       ...prevPlayer,
       pieces: [...remainingPieces],
     };
   });
-  return board;
-};
+}
 
 export { showPlayableSquares, flipPieces, placePiece, clearPlayableMarkers };
