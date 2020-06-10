@@ -1,15 +1,9 @@
-form {
-    text-align:left;
-    color:white;
-    font-size:22px;
-    width:75%;
-    margin:0 auto;
-}
+
 #container {
     margin-top: 150px;
 }
 
-input {
+button {
     cursor:pointer;
 }
 #game-title {

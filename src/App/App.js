@@ -10,16 +10,15 @@ import {
 
 /* Components */
 import Board from "../Board/Board";
-import StartScreen from '../StartScreen/StartScreen';
 import SideBar from "../Sidebar/SideBar";
 import initialBoardData from "../InitialBoardData";
 import "./App.css";
 
 function App() {
-  const [timedGame, setTimedGame] = useState("untimed");
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
   const [board, setBoard] = useState(initialBoardData);
-  const [showGameOver, setShowGameOver] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
   const [connections, setConnections] = useState({});
   const [playersWhoCantMove, setPlayersWhoCantMove] = useState(0);
   const [blacksTurn, setBlacksTurn] = useState(true);
@@ -36,28 +35,23 @@ function App() {
     ],
   });
 
-const handleInputChange = (event) => {
-  setTimedGame(event.target.value);
- 
-};
- 
-  const startGame = (event) => { 
+  const startGame = (event) => {
     event.preventDefault();
-    console.log(isGameStarted);
+
     setIsGameStarted(true);
-  }
+  };
 
   useEffect(() => {
-    if (isGameStarted) { 
-showPlayersTurn();
+    if (isGameStarted) {
+      showPlayersTurn();
     }
-    
+    // eslint-disable-next-line
   }, [blacksTurn, isGameStarted]);
 
   const showPlayersTurn = () => {
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
-    
+
     if (blacksTurn) {
       player1.pieces.forEach((piece) =>
         showPlayableSquares(boardCopy, piece, connectionsCopy)
@@ -69,10 +63,13 @@ showPlayersTurn();
     }
     setBoard(boardCopy);
 
-    
-
     setConnections(connectionsCopy);
-    checkForGameOver(connectionsCopy, playersWhoCantMove, setPlayersWhoCantMove);
+    checkForGameOver(
+      connectionsCopy,
+      playersWhoCantMove,
+      setPlayersWhoCantMove
+    );
+    
   };
 
   const checkForGameOver = (
@@ -86,15 +83,17 @@ showPlayersTurn();
       setPlayersWhoCantMove((prevState) => prevState + 1);
       if (playersWhoCantMove === 2) {
         console.log("gameOver");
+        setIsGameOver(true);
       } else {
         console.log("turn change");
+        setAlertMsg("Turn skipped: no moves")
         setBlacksTurn(!blacksTurn);
       }
     }
   };
-  
 
   const handlePlacingPiece = (id, active) => {
+    setAlertMsg("");
     setPlayersWhoCantMove(0);
     let activePlayerSetter;
     let passivePlayerSetter;
@@ -120,8 +119,7 @@ showPlayersTurn();
     const clearedBoard = clearPlayableMarkers(flippedBoard);
 
     setConnections({});
-    
-    
+
     setBoard(clearedBoard);
     checkForGameOver(board);
     setBlacksTurn(!blacksTurn);
@@ -135,9 +133,9 @@ showPlayersTurn();
         player1={player1}
         player2={player2}
         isGameStarted={isGameStarted}
-        timedGame={timedGame}
         startGame={startGame}
-        handleInputChange={handleInputChange}
+        isGameOver={isGameOver}
+        alertMsg = {alertMsg}
       />
     </div>
   );

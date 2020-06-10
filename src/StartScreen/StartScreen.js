@@ -9,31 +9,9 @@ const StartScreen = ({timedGame, startGame, handleInputChange}) => {
       <div id="container">
         <h1 id="game-title">PLAY OTHELLO!!</h1>
 
-        <form onSubmit={startGame}>
-          <p>
-            <label>
-              <input
-                type="radio"
-                value="untimed"
-                onChange={handleInputChange}
-                checked={timedGame === "untimed"}
-              ></input>
-              No time limit
-            </label>
-          </p>
-          <p>
-            <label>
-              <input
-                type="radio"
-                checked={timedGame === "timed"}
-                onChange={handleInputChange}
-                value="timed"
-              ></input>
-              SPEED OTHELLO: 30 second time limit
-            </label>
-          </p>
-          <input id="start-button" type="submit" value="Start Game!" />
-        </form>
+        
+        <button id="start-button" onClick={startGame}>Start Game!</button>
+      
         <a
           id="how-to"
           href="https://www.ultraboardgames.com/othello/game-rules.php"
