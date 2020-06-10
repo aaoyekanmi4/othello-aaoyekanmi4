@@ -14,6 +14,7 @@ function App() {
   const [board, setBoard] = useState(initialBoardData);
   const [showGameOver, setShowGameOver] = useState(false);
   const [connections, setConnections] = useState({});
+  const [playersWhoCantMove, setPlayersWhoCantMove] = useState(0);
   const [blacksTurn, setBlacksTurn] = useState(true);
   const [player1, setPlayer1] = useState({
     pieces: [
@@ -47,28 +48,33 @@ function App() {
     }
     setBoard(boardCopy);
 
-    //if player has no moves change player
-    const clickableSquares = Object.keys(connectionsCopy);
-    if (!clickableSquares.length) { 
-      setBlacksTurn(!blacksTurn);
-    }
+    
 
     setConnections(connectionsCopy);
+    checkForGameOver(connectionsCopy, playersWhoCantMove, setPlayersWhoCantMove);
   };
 
-  const checkForGameOver = (board) => { 
-    for (let row of board) { 
-      for (let square of row) { 
-        if (square.color === null) { 
-          return;
-        }
+  const checkForGameOver = (
+    connectionsCopy,
+    playersWhoCantMove,
+    setPlayersWhoCantMove
+  ) => {
+    //if player has no moves change player
+    const clickableSquares = Object.keys(connectionsCopy);
+    if (!clickableSquares.length) {
+      setPlayersWhoCantMove((prevState) => prevState + 1);
+      if (playersWhoCantMove === 2) {
+        console.log("gameOver");
+      } else {
+        console.log("turn change");
+        setBlacksTurn(!blacksTurn);
       }
     }
-    console.log('game over');
-    setShowGameOver(true);
-  }
+  };
+  
 
   const handlePlacingPiece = (id, active) => {
+    setPlayersWhoCantMove(0);
     let activePlayerSetter;
     let passivePlayerSetter;
 
