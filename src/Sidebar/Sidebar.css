@@ -1,7 +1,8 @@
 #sidebar {
     margin-top:50px;
     width:300px;
-    background:rgb(63, 59, 59);
+    background:#211f1f;
+    border:1px solid black;
     color:white;
 }
 
@@ -30,8 +31,15 @@
     padding-left:10px;
     justify-content: space-evenly;
 }
+
 #status {
-    margin-bottom:100px;
+    padding-top:75px;
+    margin-bottom:75px;
+    font-size:30px;
+}
+#clock {
+    margin-top:100px;
+    
 }
 #black-score, #white-score {
     font-size:22px;

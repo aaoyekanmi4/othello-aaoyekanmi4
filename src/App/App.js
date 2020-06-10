@@ -12,6 +12,7 @@ import "./App.css";
 
 function App() {
   const [board, setBoard] = useState(initialBoardData);
+  const [showGameOver, setShowGameOver] = useState(false);
   const [connections, setConnections] = useState({});
   const [blacksTurn, setBlacksTurn] = useState(true);
   const [player1, setPlayer1] = useState({
@@ -34,6 +35,7 @@ function App() {
   const showPlayersTurn = () => {
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
+    
     if (blacksTurn) {
       player1.pieces.forEach((piece) =>
         showPlayableSquares(boardCopy, piece, connectionsCopy)
@@ -44,8 +46,27 @@ function App() {
       );
     }
     setBoard(boardCopy);
+
+    //if player has no moves change player
+    const clickableSquares = Object.keys(connectionsCopy);
+    if (!clickableSquares.length) { 
+      setBlacksTurn(!blacksTurn);
+    }
+
     setConnections(connectionsCopy);
   };
+
+  const checkForGameOver = (board) => { 
+    for (let row of board) { 
+      for (let square of row) { 
+        if (square.color === null) { 
+          return;
+        }
+      }
+    }
+    console.log('game over');
+    setShowGameOver(true);
+  }
 
   const handlePlacingPiece = (id, active) => {
     let activePlayerSetter;
@@ -72,8 +93,11 @@ function App() {
     const clearedBoard = clearPlayableMarkers(flippedBoard);
 
     setConnections({});
-    setBlacksTurn(!blacksTurn);
+    
+    
     setBoard(clearedBoard);
+    checkForGameOver(board);
+    setBlacksTurn(!blacksTurn);
   };
 
   return (

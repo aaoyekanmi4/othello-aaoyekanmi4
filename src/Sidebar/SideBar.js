@@ -7,7 +7,7 @@ const SideBar = ({ blacksTurn, player1, player2 }) => {
     }
     return (
       <div id="sidebar">
-       
+   
           <h2 id="status">{displayWhoseTurn()}</h2>
           <div className="player-area">
             <h3 className="player-label">P1</h3>
@@ -23,8 +23,11 @@ const SideBar = ({ blacksTurn, player1, player2 }) => {
               <span id="white-score">{player2.pieces.length}</span>
             </div>
           </div>
-        </div>
-    
+            <div id="clock">
+                <h2>Time to move</h2>
+                <h1>0:00</h1>
+          </div>
+      </div>
     );
 }
 
