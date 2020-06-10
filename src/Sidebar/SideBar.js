@@ -2,6 +2,7 @@ import React from "react";
 import "./Sidebar.css";
 import StartScreen from "../StartScreen/StartScreen";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
+import GameOver from "../GameOver/GameOver";
 const SideBar = ({
   blacksTurn,
   player1,
@@ -12,7 +13,10 @@ const SideBar = ({
   alertMsg
 }) => {
  
-  const displaySideBarContent = (isGameStarted) => {
+  const displaySideBarContent = (isGameStarted, isGameOver) => {
+    if (isGameOver) { 
+      return <GameOver player1={player1} player2={player2}/>
+    }
     if (isGameStarted) {
       return (
         <ScoreBoard
@@ -30,7 +34,7 @@ const SideBar = ({
 
   return (
     <div id="sidebar">
-      {isGameOver ? <div>GameOver</div> : displaySideBarContent(isGameStarted)} 
+      {displaySideBarContent(isGameStarted, isGameOver)} 
     </div>
   );
 };
