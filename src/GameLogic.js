@@ -21,7 +21,7 @@ const showPlayableSquares = (board, piece, connections) => {
         currentY >= 0 &&
         board[currentY][currentX].color === opposingColor
       ) {
-        /*Add arrays connected opponent pieces to an object with id of null square at end. Helps with ease of changing all connected pieces on click. 
+        /*Add arrays of connected opponent pieces to an object with id of empty square at the end of the chain as the key. 
         */
         gatherConnectionsOfOpponentPieces(
           currentX,
@@ -73,7 +73,7 @@ const gatherConnectionsOfOpponentPieces = (
       connections[adjacentSquare.id] = [...connections[adjacentSquare.id], ...chain];
       return;
     }
-      //piece is same color as player piece
+      //case where piece is same color as player piece
     else {
       return;
     }

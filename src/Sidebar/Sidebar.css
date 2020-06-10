@@ -1,0 +1,57 @@
+#sidebar {
+    margin-top:50px;
+    width:300px;
+    background:rgb(63, 59, 59);
+    color:white;
+}
+
+.player-area {
+    display:flex;
+    align-items:center;
+    width:200px;
+    margin:30px auto;
+    justify-content:space-between;
+    
+}
+.player-label {
+    margin:0px;
+    font-size:30px;
+    font-weight:700;
+}
+.score-box {
+    display:flex;
+    flex-direction:row;
+    width:100px;
+    background:rgb(18, 190, 18);
+    border: 3px ridge black;
+    align-items:center;
+    border-radius:5px;
+    padding:5px;
+    padding-left:10px;
+    justify-content: space-evenly;
+}
+#status {
+    margin-bottom:100px;
+}
+#black-score, #white-score {
+    font-size:22px;
+    font-weight:700;
+}
+#black-score {
+    color:black;
+}
+
+#black-icon, #white-icon {
+    border-radius:50px;
+    width:20px;
+    height:20px;
+}
+
+#black-icon {
+    background-color:black;
+}
+
+#white-icon {
+    background-color:white;
+}
+

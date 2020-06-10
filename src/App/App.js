@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { showPlayableSquares, flipPieces, placePiece, clearPlayableMarkers } from '../GameLogic';
-import Board from '../Board/Board';
-
+import React, { useState, useEffect } from "react";
+import {
+  showPlayableSquares,
+  flipPieces,
+  placePiece,
+  clearPlayableMarkers,
+} from "../GameLogic";
+import Board from "../Board/Board";
+import SideBar from "../Sidebar/SideBar";
 import initialBoardData from "../InitialBoardData";
-import './App.css';
+import "./App.css";
 
 function App() {
   const [board, setBoard] = useState(initialBoardData);
@@ -26,55 +31,55 @@ function App() {
     showPlayersTurn();
   }, [blacksTurn]);
 
-  const showPlayersTurn = () => { 
-
+  const showPlayersTurn = () => {
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
     if (blacksTurn) {
-      player1.pieces.forEach((piece) => showPlayableSquares(boardCopy, piece, 
-        connectionsCopy));
-    }
-    else { 
+      player1.pieces.forEach((piece) =>
+        showPlayableSquares(boardCopy, piece, connectionsCopy)
+      );
+    } else {
       player2.pieces.forEach((piece) =>
         showPlayableSquares(boardCopy, piece, connectionsCopy)
       );
     }
     setBoard(boardCopy);
     setConnections(connectionsCopy);
-  
-  }
+  };
 
-  
- 
-  const handlePlacingPiece = (id, active) => { 
+  const handlePlacingPiece = (id, active) => {
     let activePlayerSetter;
     let passivePlayerSetter;
 
-      if (active === "black") {
-        activePlayerSetter = setPlayer1;
-        passivePlayerSetter = setPlayer2;
-      }
-      else if (active ==="white"){ 
-        activePlayerSetter = setPlayer2;
-        passivePlayerSetter = setPlayer1;
-      }
-        
+    if (active === "black") {
+      activePlayerSetter = setPlayer1;
+      passivePlayerSetter = setPlayer2;
+    } else if (active === "white") {
+      activePlayerSetter = setPlayer2;
+      passivePlayerSetter = setPlayer1;
+    }
+
     placePiece(id, board, activePlayerSetter);
-  
-    const flippedBoard = flipPieces(id, [...board], connections, activePlayerSetter, passivePlayerSetter);
-    
+
+    const flippedBoard = flipPieces(
+      id,
+      [...board],
+      connections,
+      activePlayerSetter,
+      passivePlayerSetter
+    );
+
     const clearedBoard = clearPlayableMarkers(flippedBoard);
-   
+
     setConnections({});
     setBlacksTurn(!blacksTurn);
     setBoard(clearedBoard);
-  }
+  };
 
- 
-  
   return (
     <div className="App">
-      <Board board={board} handlePlacingPiece={handlePlacingPiece}/>
+      <Board board={board} handlePlacingPiece={handlePlacingPiece} />
+      <SideBar blacksTurn={blacksTurn} player1={player1} player2={player2}/>
     </div>
   );
 }
