@@ -29,4 +29,6 @@ for (let y = 0; y < BOARD_SIZE; y++) {
   }
 }
 
+
+
 export default initialBoardData;

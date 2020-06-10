@@ -1,17 +1,19 @@
 form {
     text-align:left;
-    color:black;
+    color:white;
     font-size:22px;
     width:75%;
     margin:0 auto;
 }
 #container {
-    margin-top: 75px;
+    margin-top: 150px;
 }
 
-
+input {
+    cursor:pointer;
+}
 #game-title {
-    color:black;
+    color:white;
 }
 #start-button {
     width: 200px;
@@ -25,7 +27,7 @@ form {
     
 }
 #how-to{
-    color:black;
+    color:white;
     
     font-weight:bold;
     text-decoration:none;

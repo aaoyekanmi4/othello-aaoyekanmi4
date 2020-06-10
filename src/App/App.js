@@ -16,7 +16,8 @@ import initialBoardData from "../InitialBoardData";
 import "./App.css";
 
 function App() {
-
+  const [timedGame, setTimedGame] = useState("untimed");
+  const [isGameStarted, setIsGameStarted] = useState(false);
   const [board, setBoard] = useState(initialBoardData);
   const [showGameOver, setShowGameOver] = useState(false);
   const [connections, setConnections] = useState({});
@@ -35,9 +36,23 @@ function App() {
     ],
   });
 
+const handleInputChange = (event) => {
+  setTimedGame(event.target.value);
+ 
+};
+ 
+  const startGame = (event) => { 
+    event.preventDefault();
+    console.log(isGameStarted);
+    setIsGameStarted(true);
+  }
+
   useEffect(() => {
-    showPlayersTurn();
-  }, [blacksTurn]);
+    if (isGameStarted) { 
+showPlayersTurn();
+    }
+    
+  }, [blacksTurn, isGameStarted]);
 
   const showPlayersTurn = () => {
     const boardCopy = [...board];
@@ -114,9 +129,16 @@ function App() {
 
   return (
     <div className="App">
-      
       <Board board={board} handlePlacingPiece={handlePlacingPiece} />
-      <SideBar blacksTurn={blacksTurn} player1={player1} player2={player2}/>
+      <SideBar
+        blacksTurn={blacksTurn}
+        player1={player1}
+        player2={player2}
+        isGameStarted={isGameStarted}
+        timedGame={timedGame}
+        startGame={startGame}
+        handleInputChange={handleInputChange}
+      />
     </div>
   );
 }
