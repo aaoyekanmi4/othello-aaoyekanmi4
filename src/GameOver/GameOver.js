@@ -1,6 +1,18 @@
 import React from 'react'
 import './GameOver.css'
-const GameOver = ({ player1, player2,resetGame }) => {
+const GameOver = ({ player1, player2, resetGame }) => {
+ 
+  //return how many pieces flipped on avg per turn
+  const calculateAvgCaptures = (player) => {
+    const captureSum = player.captures.reduce((a, b) => a + b);
+    const totalMoves = player.captures.length;
+    //return avg up to 2 decimal places
+    return (captureSum / totalMoves).toFixed(2);
+  }  
+  const findLargestCapture = (player) => { 
+    const largestCapture = Math.max(...player.captures);
+    return largestCapture;
+  }
     const declareWinner = (player1, player2) => {
         if (player1.pieces.length > player2.pieces.length) {
             return `Player 1 Won!`
@@ -30,15 +42,21 @@ const GameOver = ({ player1, player2,resetGame }) => {
         </div>
         <h3>Stats</h3>
         <h4>Player1</h4>
-        <p className="stat">Total moves</p>
-        <p className="stat">Average Capture per move</p>
-        <p className="stat">Largest capture</p>
+        <p className="stat">Total moves: {player1.captures.length}</p>
+        <p className="stat">
+          Average captures per move: {calculateAvgCaptures(player1)}
+        </p>
+        <p className="stat">Largest capture: {findLargestCapture(player1)} </p>
         <h4>Player2</h4>
-        <p className="stat">Total moves</p>
-        <p className="stat">Average Capture per move</p>
-        <p className="stat">Largest capture</p>
+        <p className="stat">Total moves: {player2.captures.length}</p>
+        <p className="stat">
+          Average captures per move: {calculateAvgCaptures(player2)}
+        </p>
+        <p className="stat">Largest capture: {findLargestCapture(player2)} </p>
 
-            <button id="play-again" onClick={() => resetGame()}>Play Again?</button>
+        <button id="play-again" onClick={() => resetGame()}>
+          Play Again?
+        </button>
       </div>
     );
 }
