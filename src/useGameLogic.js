@@ -83,7 +83,7 @@ export const useGameLogic = () => {
   };
 
   /* Main Game Play*/
-  const showAllPlayableSquares = () => {
+  const showAllPlayableSquaresOnTurn = () => {
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
 
@@ -306,7 +306,7 @@ export const useGameLogic = () => {
     handlePlacingPiece,
     resetGame,
     startGame,
-    showAllPlayableSquares,
+    showAllPlayableSquaresOnTurn,
     alertMsg,
   ];
 };

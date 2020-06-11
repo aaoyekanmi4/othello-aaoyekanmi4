@@ -18,13 +18,13 @@ function App() {
     handlePlacingPiece,
     resetGame,
     startGame,
-    showAllPlayableSquares,
+    showAllPlayableSquaresOnTurn,
     alertMsg,
   ] = useGameLogic();
 
   useEffect(() => {
     if (isGameStarted) {
-      showAllPlayableSquares();
+      showAllPlayableSquaresOnTurn();
     }
     // eslint-disable-next-line
   }, [blacksTurn, isGameStarted]);
