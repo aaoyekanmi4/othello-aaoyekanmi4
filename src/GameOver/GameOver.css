@@ -6,7 +6,7 @@ h4 {
 }
 #play-again{
     background: green;
-    margin: 25px auto;
+    margin:15px auto 5px auto;
     color: white;
     font-size: 20px;
     border: 1px solid white;
@@ -14,7 +14,7 @@ h4 {
 }
 #gameover-screen {
     margin:0px;
-    height:618px;
+ 
 }
 @media screen and (max-width:600px) {
     #gameover-screen {

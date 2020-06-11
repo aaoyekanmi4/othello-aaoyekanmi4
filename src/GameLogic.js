@@ -80,12 +80,12 @@ const gatherConnectionsOfOpponentPieces = (
   }
 };
 //replace marker(pw or pb) with right color of piece on click
-const placePiece = (id, board, activePlayerSetter) => {
+const placePiece = (id, board, activeSetter) => {
   for (let row of board) {
     for (let square of row) {
       if (square.id === id) {
         square.color = square.color === "pb" ? "b" : "w";
-            activePlayerSetter((prevPlayer) => ({
+            activeSetter((prevPlayer) => ({
               ...prevPlayer,
               pieces: [...prevPlayer.pieces, square],
             }));
@@ -122,8 +122,8 @@ const flipPieces = (
   id,
   board,
   connections,
-  activePlayerSetter,
-  passivePlayerSetter
+  activeSetter,
+  passiveSetter
 ) => {
 
   //flip the color of the pieces where the id matches the key of the connections object
@@ -132,8 +132,8 @@ const flipPieces = (
   for (let piece of piecesToFlip) {
     changePieceColor(board, piece);
   }
-
-changePieceOwnership(piecesToFlip, activePlayerSetter,passivePlayerSetter)
+countCaptures(piecesToFlip, activeSetter);
+changePieceOwnership(piecesToFlip, activeSetter,passiveSetter)
   return board;
 };
 
@@ -142,16 +142,24 @@ const changePieceColor = (board, piece) => {
     board[piece.y][piece.x].color === "w" ? "b" : "w";
   
 }
+const countCaptures = (flippedPieces, activeSetter) => { 
+  const numOfCaptures = flippedPieces.length;
+     activeSetter((prevPlayer) => ({
+       ...prevPlayer,
+       captures: [...prevPlayer.captures, numOfCaptures],
+     }));
+}
 
-const changePieceOwnership = (flippedPieces, activePlayerSetter, passivePlayerSetter) => { 
+const changePieceOwnership = (flippedPieces, activeSetter, passiveSetter) => { 
    //add pieces to the state of the player who clicked
-  activePlayerSetter((prevPlayer) => ({
+  
+  activeSetter((prevPlayer) => ({
     ...prevPlayer,
     pieces: [...prevPlayer.pieces, ...flippedPieces],
   }));
   
   //take the same pieces away from the other player
-  passivePlayerSetter((prevPlayer) => {
+  passiveSetter((prevPlayer) => {
     const remainingPieces = multiFilter(prevPlayer.pieces, flippedPieces);
 
     return {

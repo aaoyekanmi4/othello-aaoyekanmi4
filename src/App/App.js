@@ -8,6 +8,9 @@ import {
   clearPlayableMarkers,
 } from "../GameLogic";
 
+
+/*Game flow functions*/
+
 /* Components */
 import Board from "../Board/Board";
 import SideBar from "../Sidebar/SideBar";
@@ -23,12 +26,14 @@ function App() {
   const [playersWhoCantMove, setPlayersWhoCantMove] = useState(0);
   const [blacksTurn, setBlacksTurn] = useState(true);
   const [player1, setPlayer1] = useState({
+    captures:[],
     pieces: [
       { id: 36, x: 4, y: 4, color: "b" },
       { id: 27, x: 3, y: 3, color: "b" },
     ],
   });
   const [player2, setPlayer2] = useState({
+    captures: [],
     pieces: [
       { id: 35, x: 3, y: 4, color: "w" },
       { id: 28, x: 4, y: 3, color: "w" },
@@ -37,7 +42,6 @@ function App() {
 
   const startGame = (event) => {
     event.preventDefault();
-
     setIsGameStarted(true);
   };
   
@@ -45,27 +49,25 @@ function App() {
     setConnections({});
     setAlertMsg("");
     setPlayersWhoCantMove(0);
-  
     setBoard(makeInitialBoard());
-     setPlayer1((prevPlayer) => ({
-      
-       pieces: [
-      { id: 36, x: 4, y: 4, color: "b" },
-      { id: 27, x: 3, y: 3, color: "b" },
-    ],
-     })
-     );
-       setPlayer2((prevPlayer) => ({
-         pieces: [
-           { id: 35, x: 3, y: 4, color: "w" },
-           { id: 28, x: 4, y: 3, color: "w" },
-         ],
-       }));
+    setPlayer1((prevPlayer) => ({
+      captures: [],
+      pieces: [
+        { id: 36, x: 4, y: 4, color: "b" },
+        { id: 27, x: 3, y: 3, color: "b" },
+      ],
+    }));
+    setPlayer2((prevPlayer) => ({
+      captures: [],
+      pieces: [
+        { id: 35, x: 3, y: 4, color: "w" },
+        { id: 28, x: 4, y: 3, color: "w" },
+      ],
+    }));
     setIsGameOver(false);
     setIsGameStarted(false);
       
   }
-
 
   useEffect(() => {
     if (isGameStarted) {
@@ -75,10 +77,9 @@ function App() {
   }, [blacksTurn, isGameStarted]);
 
   const showPlayersTurn = () => {
-  
+
     const boardCopy = [...board];
     const connectionsCopy = Object.assign({}, connections);
-
     if (blacksTurn) {
       player1.pieces.forEach((piece) =>
         showPlayableSquares(boardCopy, piece, connectionsCopy)
@@ -88,10 +89,9 @@ function App() {
         showPlayableSquares(boardCopy, piece, connectionsCopy)
       );
     }
+
     setBoard(boardCopy);
-
     setConnections(connectionsCopy);
-
     checkForGameOver(
       connectionsCopy,
       playersWhoCantMove,
@@ -125,7 +125,6 @@ function App() {
     setPlayersWhoCantMove(0);
     let activePlayerSetter;
     let passivePlayerSetter;
-
     if (active === "black") {
       activePlayerSetter = setPlayer1;
       passivePlayerSetter = setPlayer2;
@@ -133,9 +132,7 @@ function App() {
       activePlayerSetter = setPlayer2;
       passivePlayerSetter = setPlayer1;
     }
-
     placePiece(id, board, activePlayerSetter);
-
     const flippedBoard = flipPieces(
       id,
       [...board],
@@ -143,11 +140,8 @@ function App() {
       activePlayerSetter,
       passivePlayerSetter
     );
-
     const clearedBoard = clearPlayableMarkers(flippedBoard);
-
     setConnections({});
-
     setBoard(clearedBoard);
     checkForGameOver(board);
     setBlacksTurn(!blacksTurn);
