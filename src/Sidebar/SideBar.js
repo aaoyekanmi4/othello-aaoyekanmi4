@@ -11,12 +11,13 @@ const SideBar = ({
   startGame,
   isGameOver,
   alertMsg,
-  resetGame
+  resetGame,
 }) => {
- 
   const displaySideBarContent = (isGameStarted, isGameOver) => {
-    if (isGameOver) { 
-      return <GameOver player1={player1} player2={player2} resetGame={resetGame}/>
+    if (isGameOver) {
+      return (
+        <GameOver player1={player1} player2={player2} resetGame={resetGame} />
+      );
     }
     if (isGameStarted) {
       return (
@@ -27,16 +28,13 @@ const SideBar = ({
           alertMsg={alertMsg}
         />
       );
-    }
-    else { 
-      return <StartScreen startGame={startGame}  />;
+    } else {
+      return <StartScreen startGame={startGame} />;
     }
   };
 
   return (
-    <div id="sidebar">
-      {displaySideBarContent(isGameStarted, isGameOver)} 
-    </div>
+    <div id="sidebar">{displaySideBarContent(isGameStarted, isGameOver)}</div>
   );
 };
 

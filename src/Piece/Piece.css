@@ -9,7 +9,7 @@
   margin-top: -25px;
 }
 
-@media screen and (max-width: 616px) {
+@media screen and (max-width: 600px) {
   .piece {
     width: 30px;
     height: 30px;

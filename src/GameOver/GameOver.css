@@ -1,26 +1,25 @@
 .stat {
-    margin:2px;
+  margin: 2px;
 }
 h4 {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
-#play-again{
-    background: green;
-    margin:15px auto 5px auto;
-    color: white;
-    font-size: 20px;
-    border: 1px solid white;
-    padding: 5px;
+#play-again {
+  background: green;
+  margin: 15px auto 5px auto;
+  color: white;
+  font-size: 20px;
+  border: 1px solid white;
+  padding: 5px;
 }
 #gameover-screen {
-    margin:0px;
- 
+  margin: 0px;
 }
-@media screen and (max-width:600px) {
-    #gameover-screen {
-        height:100vh;
-        display: flex;
+@media screen and (max-width: 600px) {
+  #gameover-screen {
+    height: 100vh;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    }
+  }
 }

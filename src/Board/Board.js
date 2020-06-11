@@ -8,7 +8,7 @@ const Board = ({ board, handlePlacingPiece }) => {
       return (
         <Row
           key={index}
-              cellData={row}
+          cellData={row}
           handlePlacingPiece={handlePlacingPiece}
         />
       );

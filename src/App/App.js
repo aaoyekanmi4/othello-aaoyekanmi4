@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useGameLogic }  from '../useGameLogic';
-
+import { useGameLogic } from "../useGameLogic";
 
 /* Components */
 import Board from "../Board/Board";
@@ -19,17 +18,16 @@ function App() {
     handlePlacingPiece,
     resetGame,
     startGame,
-    showPlayersTurn,
+    showAllPlayableSquares,
     alertMsg,
   ] = useGameLogic();
 
-
-    useEffect(() => {
-      if (isGameStarted) {
-        showPlayersTurn();
-      }
-      // eslint-disable-next-line
-    }, [blacksTurn, isGameStarted]);
+  useEffect(() => {
+    if (isGameStarted) {
+      showAllPlayableSquares();
+    }
+    // eslint-disable-next-line
+  }, [blacksTurn, isGameStarted]);
 
   return (
     <div className="App">

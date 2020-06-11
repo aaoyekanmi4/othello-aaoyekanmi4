@@ -1,25 +1,22 @@
 #alert {
-    color:red;
-    font-size:18px;
+  color: red;
+  font-size: 18px;
 }
-
-
 
 @media screen and (max-width: 918px) {
-#scores-container {
-    display:flex;
-}
+  #scores-container {
+    display: flex;
+  }
 
-.player-area {
-    width:150px;
-    font-size:20px;
-
-}
-.player-label {
-    font-size:20px;
-}
-#status {
- padding-top:20px;
- margin-bottom:20px;
-}
+  .player-area {
+    width: 150px;
+    font-size: 20px;
+  }
+  .player-label {
+    font-size: 20px;
+  }
+  #status {
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
 }
