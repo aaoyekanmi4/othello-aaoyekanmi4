@@ -4,8 +4,10 @@
   margin:0 auto;
   width:fit-content;
   position:relative;
+  max-width:918px;
   
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -15,6 +17,13 @@
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+}
+@media screen and (max-width:918px) {
+  .App {
+    flex-direction:column;
+    height:100vh;
+    
   }
 }
 

@@ -43,7 +43,7 @@ function App() {
   
   const resetGame = () => {
     setConnections({});
-    setAlertMsg({});
+    setAlertMsg("");
     setPlayersWhoCantMove(0);
   
     setBoard(makeInitialBoard());
@@ -91,6 +91,7 @@ function App() {
     setBoard(boardCopy);
 
     setConnections(connectionsCopy);
+
     checkForGameOver(
       connectionsCopy,
       playersWhoCantMove,
@@ -154,7 +155,6 @@ function App() {
 
   return (
     <div className="App">
-      <Board board={board} handlePlacingPiece={handlePlacingPiece} />
       <SideBar
         blacksTurn={blacksTurn}
         player1={player1}
@@ -165,6 +165,7 @@ function App() {
         alertMsg={alertMsg}
         resetGame={resetGame}
       />
+      <Board board={board} handlePlacingPiece={handlePlacingPiece} />
     </div>
   );
 }

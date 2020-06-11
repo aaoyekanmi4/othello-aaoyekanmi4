@@ -28,3 +28,11 @@ button {
 }
 
 
+@media screen and (max-width: 918px) {
+
+ #container {
+    margin-top:0px;
+    margin-bottom:10px;
+ 
+}
+}

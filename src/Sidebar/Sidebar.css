@@ -11,7 +11,7 @@
     display:flex;
     align-items:center;
     width:200px;
-    margin:30px auto;
+    margin:20px auto;
     justify-content:space-between;
     
 }
@@ -62,4 +62,27 @@
 
 #white-icon {
     background-color:white;
+}
+
+@media screen and (max-width: 918px) {
+
+ #sidebar {
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:496px;
+}
+.player-area {
+    width:150px;
+
+}
+}
+
+@media screen and (max-width: 600px) {
+
+ #sidebar {
+     margin-top:0px;
+ width:360px;
+}
 }

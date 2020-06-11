@@ -1,5 +1,13 @@
 #board {
-    border:1px solid black;
-    width:fit-content;
-    margin-top:50px;
+  border: 1px solid black;
+  width: fit-content;
+  margin-top: 50px;
 }
+
+@media screen and (max-width: 918px) {
+  #board {
+    margin: 0 auto;
+    
+  }
+}
+

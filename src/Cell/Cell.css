@@ -1,7 +1,22 @@
 .square {
-   width:75px;
-   height:75px;
-   background-color:green;
-   border:1px solid black;
-   position:relative;
+  width: 75px;
+  height: 75px;
+  background-color: green;
+  border: 1px solid black;
+  position: relative;
+}
+
+@media screen and (max-width: 900px) { 
+   .square {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+
+@media screen and (max-width: 616px) {
+  .square {
+    width: 43px;
+    height: 43px;
+  }
 }

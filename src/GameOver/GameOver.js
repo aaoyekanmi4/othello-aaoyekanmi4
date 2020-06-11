@@ -11,7 +11,7 @@ const GameOver = ({ player1, player2,resetGame }) => {
 
     }
     return (
-      <div>
+      <div id="gameover-screen">
         <h1>GAME OVER </h1>
         <h2>{declareWinner(player1, player2)}</h2>
         <div className="player-area">
@@ -38,7 +38,7 @@ const GameOver = ({ player1, player2,resetGame }) => {
         <p className="stat">Average Capture per move</p>
         <p className="stat">Largest capture</p>
 
-            <button onClick={() => resetGame()}>Play Again?</button>
+            <button id="play-again" onClick={() => resetGame()}>Play Again?</button>
       </div>
     );
 }

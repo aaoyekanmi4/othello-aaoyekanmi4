@@ -1,16 +1,25 @@
 .playable-space {
-    border-width:2px;
-    border-style:solid;
-    border-radius: 50px;
-    position: absolute; 
-    width: 50px; 
-    height: 50px;
-    left: 50%;
-    margin-left: -25px;
-    top: 50%;
-    margin-top: -25px;
-
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  margin-left: -27px;
+  top: 50%;
+  margin-top: -27px;
 }
 .playable-space:hover {
-    cursor:pointer;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 616px) {
+  .playable-space {
+    border-width: 1px;
+    width: 30px;
+    height: 30px;
+    margin-top: -17px;
+    margin-left: -17px;
+  }
 }
