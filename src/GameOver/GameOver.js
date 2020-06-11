@@ -2,16 +2,18 @@ import React from 'react'
 import './GameOver.css'
 const GameOver = ({ player1, player2, resetGame }) => {
  
-  //return how many pieces flipped on avg per turn
+  //return how many pieces flipped on avg per turn per player
   const calculateAvgCaptures = (player) => {
     const captureSum = player.captures.reduce((a, b) => a + b);
     const totalMoves = player.captures.length;
     //return avg up to 2 decimal places
     return (captureSum / totalMoves).toFixed(2);
   }  
+
   const findLargestCapture = (player) => { 
     const largestCapture = Math.max(...player.captures);
     return largestCapture;
+  
   }
     const declareWinner = (player1, player2) => {
         if (player1.pieces.length > player2.pieces.length) {
