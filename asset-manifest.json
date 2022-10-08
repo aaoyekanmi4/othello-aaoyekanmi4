@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/othello-aaoyekanmi4/static/css/main.62e5e904.chunk.css",
+    "main.js": "/othello-aaoyekanmi4/static/js/main.c600ebbd.chunk.js",
+    "main.js.map": "/othello-aaoyekanmi4/static/js/main.c600ebbd.chunk.js.map",
+    "runtime-main.js": "/othello-aaoyekanmi4/static/js/runtime-main.c15ecc62.js",
+    "runtime-main.js.map": "/othello-aaoyekanmi4/static/js/runtime-main.c15ecc62.js.map",
+    "static/js/2.443c7d2e.chunk.js": "/othello-aaoyekanmi4/static/js/2.443c7d2e.chunk.js",
+    "static/js/2.443c7d2e.chunk.js.map": "/othello-aaoyekanmi4/static/js/2.443c7d2e.chunk.js.map",
+    "index.html": "/othello-aaoyekanmi4/index.html",
+    "precache-manifest.3cabccaabce8f7da2fdac37f2c799804.js": "/othello-aaoyekanmi4/precache-manifest.3cabccaabce8f7da2fdac37f2c799804.js",
+    "service-worker.js": "/othello-aaoyekanmi4/service-worker.js",
+    "static/css/main.62e5e904.chunk.css.map": "/othello-aaoyekanmi4/static/css/main.62e5e904.chunk.css.map",
+    "static/js/2.443c7d2e.chunk.js.LICENSE.txt": "/othello-aaoyekanmi4/static/js/2.443c7d2e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c15ecc62.js",
+    "static/js/2.443c7d2e.chunk.js",
+    "static/css/main.62e5e904.chunk.css",
+    "static/js/main.c600ebbd.chunk.js"
+  ]
+}
